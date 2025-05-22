@@ -33,6 +33,8 @@
             #eibe-title,
             #slogan {
                 transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+
+                white-space: pre-wrap; /* 기본 white-space: nowrap에서 변경 */
             }
             .slide-out {
                 transform: translateX(100vw);
@@ -151,6 +153,30 @@
                 font-weight: bold;
                 text-shadow: 0 0 5px black;
             }
+            #final-page {
+                display: none;
+                position: absolute;
+                inset: 0;
+                background: black;
+                color: white;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                flex-direction: column;
+                z-index: 9999;
+                font-family: "Georgia", serif;
+                font-size: 2rem;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
         </style>
     </head>
     <body>
@@ -164,11 +190,19 @@
             <div id="progress-bar">
                 <div id="progress-fill"></div>
             </div>
-            <div id="progress-counter">1 / 57</div>
+            <div id="progress-counter">1 / 49</div>
+        </div>
+        <div id="final-page">
+            <h1 style="font-size: 3rem; animation: fadeIn 2s ease-out forwards">
+                Thank you for joining us.
+            </h1>
+            <p style="margin-top: 20px; font-size: 1.5rem; opacity: 0.8">
+                Together, we grow stronger. 🚀
+            </p>
         </div>
         <script>
             let currentSlide = 1;
-            const totalSlides = 48;
+            const totalSlides = 49;
             const slideImg = document.getElementById("slide-img");
             const intro = document.getElementById("intro");
             const slider = document.getElementById("slider");
@@ -176,10 +210,10 @@
             const eibeTitle = document.getElementById("eibe-title");
             const hint = document.getElementById("enter-hint");
             const progressFill = document.getElementById("progress-fill");
+            const finalPage = document.getElementById("final-page");
 
             let stage = 0;
-            const sloganText = "Wishing You Symbiotic Growth";
-            let sloganInterval;
+            const sloganText = "Wishing_You_Symbiotic_Growth";
 
             function handleAdvance() {
                 if (stage === 0) {
@@ -216,12 +250,18 @@
             document.addEventListener("touchstart", () => {
                 handleAdvance();
             });
+
             function showSlogan() {
                 slogan.innerHTML = "";
-                for (let i = 0; i < sloganText.length; i++) {
-                    const char = sloganText[i];
+                const textWithSpaces = sloganText.replace(/_/g, " ");
+                for (let i = 0; i < textWithSpaces.length; i++) {
                     const span = document.createElement("span");
-                    span.textContent = char === " " ? "\u00A0" : char; // 공백은 줄바꿈 방지하는 &nbsp 처리
+                    // 공백이면 &nbsp;로 설정
+                    if (textWithSpaces[i] === " ") {
+                        span.innerHTML = "&nbsp;";
+                    } else {
+                        span.textContent = textWithSpaces[i];
+                    }
                     span.style.animationDelay = `${i * 80}ms`;
                     slogan.appendChild(span);
                 }
@@ -238,7 +278,6 @@
             }
 
             function resetSlogan() {
-                clearInterval(sloganInterval);
                 slogan.textContent = "";
                 slogan.style.opacity = 0;
             }
@@ -261,16 +300,28 @@
                 setTimeout(() => {
                     slider.style.display = "none";
                     intro.style.display = "flex";
+                    eibeTitle.classList.remove("slide-out");
+                    slogan.classList.remove("slide-out");
+                    hint.classList.remove("slide-out");
                     setTimeout(() => {
                         intro.style.opacity = 1;
                     }, 50);
                 }, 500);
             }
 
+            function showFinalPage() {
+                slider.style.display = "none";
+                finalPage.style.display = "flex";
+            }
+
             function nextSlide() {
                 if (currentSlide < totalSlides) {
                     currentSlide++;
-                    updateSlide();
+                    if (currentSlide === totalSlides) {
+                        showFinalPage();
+                    } else {
+                        updateSlide();
+                    }
                     updateProgressBar();
                 }
             }
@@ -292,9 +343,7 @@
                         slideImg.style.opacity = 1;
                     };
                     slideImg.onerror = () => {
-                        alert(
-                            `\uC774\uBBF8\uC9C0 \uB85C\uB529 \uC2E4\uD328: ${path}`
-                        );
+                        alert(`이미지 로딩 실패: ${path}`);
                         slideImg.style.opacity = 1;
                     };
                 }, 200);
