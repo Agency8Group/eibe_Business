@@ -347,6 +347,20 @@
             function updateProgressBar() {
                 const percent = (currentSlide / totalSlides) * 100;
                 progressFill.style.width = `${percent}%`;
+
+                // 색상 배열 (10장마다 바뀜)
+                const colors = [
+                    "#d4af37", // Gold
+                    "#1e90ff", // DodgerBlue
+                    "#32cd32", // LimeGreen
+                    "#ff6347", // Tomato
+                    "#8a2be2", // BlueViolet
+                ];
+                const colorIndex =
+                    Math.floor((currentSlide - 1) / 10) % colors.length;
+                progressFill.style.backgroundColor = colors[colorIndex];
+                progressFill.style.boxShadow = `0 0 8px ${colors[colorIndex]}`;
+
                 const counter = document.getElementById("progress-counter");
                 if (counter) {
                     counter.textContent = `${currentSlide} / ${totalSlides}`;
