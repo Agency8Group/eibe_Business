@@ -32,7 +32,7 @@
             }
             #eibe-title,
             #slogan {
-                transition: transform 1s ease, opacity 0.5s ease;
+                transition: opacity 0.5s ease-in-out, transform 0.5s ease;
             }
             .slide-out {
                 transform: translateX(100vw);
@@ -46,7 +46,8 @@
                 margin-bottom: 20px;
                 color: #f0f0f0;
                 text-shadow: 0 0 4px #aaa, 0 0 8px #888, 0 0 12px #666;
-                animation: softGlow 3s ease-in-out infinite alternate;
+                animation: popIn 1s ease-out,
+                    softGlow 3s ease-in-out infinite alternate;
             }
             @keyframes softGlow {
                 0% {
@@ -54,6 +55,16 @@
                 }
                 100% {
                     text-shadow: 0 0 6px #999, 0 0 12px #777, 0 0 16px #555;
+                }
+            }
+            @keyframes popIn {
+                0% {
+                    transform: scale(0.8);
+                    opacity: 0;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
                 }
             }
             #slogan {
@@ -65,6 +76,17 @@
                 font-family: "Georgia", serif;
                 color: #dddddd;
                 text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+            }
+            #slogan span {
+                display: inline-block;
+                opacity: 0;
+                animation: fadeChar 0.3s forwards;
+            }
+            @keyframes fadeChar {
+                to {
+                    opacity: 1;
+                    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+                }
             }
             #enter-hint {
                 position: absolute;
@@ -109,11 +131,10 @@
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                height: 8px; /* 더 두껍게 */
-                background-color: rgba(255, 255, 255, 0.2); /* 더 밝게 */
+                height: 8px;
+                background-color: rgba(255, 255, 255, 0.2);
                 box-shadow: 0 0 5px #ffffff80;
             }
-
             #progress-fill {
                 width: 0%;
                 height: 100%;
@@ -123,7 +144,7 @@
             }
             #progress-counter {
                 position: absolute;
-                bottom: 12px; /* 바보다 살짝 위 */
+                bottom: 12px;
                 right: 20px;
                 font-size: 1rem;
                 color: white;
@@ -195,18 +216,16 @@
             document.addEventListener("touchstart", () => {
                 handleAdvance();
             });
-
             function showSlogan() {
-                let i = 0;
+                slogan.innerHTML = "";
+                for (let i = 0; i < sloganText.length; i++) {
+                    const char = sloganText[i];
+                    const span = document.createElement("span");
+                    span.textContent = char === " " ? "\u00A0" : char; // 공백은 줄바꿈 방지하는 &nbsp 처리
+                    span.style.animationDelay = `${i * 80}ms`;
+                    slogan.appendChild(span);
+                }
                 slogan.style.opacity = 1;
-                slogan.textContent = "";
-                sloganInterval = setInterval(() => {
-                    slogan.textContent += sloganText[i];
-                    i++;
-                    if (i === sloganText.length) {
-                        clearInterval(sloganInterval);
-                    }
-                }, 80);
             }
 
             function animateTextOut(callback) {
@@ -273,7 +292,9 @@
                         slideImg.style.opacity = 1;
                     };
                     slideImg.onerror = () => {
-                        alert(`이미지 로딩 실패: ${path}`);
+                        alert(
+                            `\uC774\uBBF8\uC9C0 \uB85C\uB529 \uC2E4\uD328: ${path}`
+                        );
                         slideImg.style.opacity = 1;
                     };
                 }, 200);
@@ -282,12 +303,7 @@
             function updateProgressBar() {
                 const percent = (currentSlide / totalSlides) * 100;
                 progressFill.style.width = `${percent}%`;
-            }
-            function updateProgressBar() {
-                const percent = (currentSlide / totalSlides) * 100;
-                progressFill.style.width = `${percent}%`;
 
-                // 페이지 수 표시
                 const counter = document.getElementById("progress-counter");
                 if (counter) {
                     counter.textContent = `${currentSlide} / ${totalSlides}`;
