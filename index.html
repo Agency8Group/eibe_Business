@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <title>eibe Company Intro</title>
         <style>
-            /* ... (스타일 부분은 기존 그대로 유지합니다) ... */
+            /* 기본 리셋 및 전체 스타일 */
             * {
                 margin: 0;
                 padding: 0;
@@ -18,24 +18,29 @@
                 overflow: hidden;
                 font-family: "Arial", sans-serif;
             }
+
+            /* 인트로 섹션 */
             #intro {
                 width: 100%;
                 height: 100%;
                 color: white;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                flex-direction: column;
                 opacity: 1;
                 transition: opacity 1s ease;
                 position: relative;
                 overflow: hidden;
+                user-select: none;
             }
+
             #eibe-title,
             #slogan {
                 transition: opacity 0.5s ease-in-out, transform 0.5s ease;
                 white-space: pre-wrap;
             }
+
             #eibe-title {
                 font-size: clamp(24px, 9vw, 72px);
                 font-weight: bold;
@@ -46,6 +51,7 @@
                 animation: popIn 1s ease-out,
                     softGlow 3s ease-in-out infinite alternate;
             }
+
             @keyframes softGlow {
                 0% {
                     text-shadow: 0 0 4px #aaa, 0 0 8px #888, 0 0 12px #666;
@@ -54,6 +60,7 @@
                     text-shadow: 0 0 6px #999, 0 0 12px #777, 0 0 16px #555;
                 }
             }
+
             @keyframes popIn {
                 0% {
                     transform: scale(0.8);
@@ -64,6 +71,7 @@
                     opacity: 1;
                 }
             }
+
             #slogan {
                 font-size: clamp(16px, 5vw, 36px);
                 font-weight: 400;
@@ -73,13 +81,31 @@
                 font-family: "Georgia", serif;
                 color: #dddddd;
                 text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+                margin-bottom: 60px;
             }
+
             #slogan span {
                 display: inline-block;
                 opacity: 0;
                 transform: scale(0.6) translateY(10px);
                 animation: popFadeIn 0.4s ease-out forwards;
             }
+
+            @keyframes popFadeIn {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.6) translateY(10px);
+                }
+                60% {
+                    opacity: 1;
+                    transform: scale(1.1) translateY(0);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+
             #enter-hint {
                 position: absolute;
                 bottom: 40px;
@@ -87,7 +113,9 @@
                 color: white;
                 text-shadow: 0 0 6px #999, 0 0 10px #666;
                 animation: pulse 1.5s infinite;
+                user-select: none;
             }
+
             @keyframes pulse {
                 0% {
                     opacity: 0.4;
@@ -102,6 +130,8 @@
                     transform: scale(1);
                 }
             }
+
+            /* 슬라이더 섹션 */
             #slider {
                 width: 100%;
                 height: 100%;
@@ -110,14 +140,20 @@
                 opacity: 0;
                 transform: translateX(100%);
                 transition: opacity 1s ease, transform 1s ease;
+                background-color: #111;
+                user-select: none;
             }
+
             #slide-img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
                 opacity: 1;
                 transition: opacity 0.5s ease-in-out;
+                background-color: black;
+                user-select: none;
             }
+
             #progress-bar {
                 position: absolute;
                 bottom: 0;
@@ -127,6 +163,7 @@
                 background-color: rgba(255, 255, 255, 0.2);
                 box-shadow: 0 0 5px #ffffff80;
             }
+
             #progress-fill {
                 width: 0%;
                 height: 100%;
@@ -134,6 +171,7 @@
                 transition: width 0.3s ease;
                 box-shadow: 0 0 8px #d4af37;
             }
+
             #progress-counter {
                 position: absolute;
                 bottom: 12px;
@@ -142,7 +180,10 @@
                 color: white;
                 font-weight: bold;
                 text-shadow: 0 0 5px black;
+                user-select: none;
             }
+
+            /* 최종 페이지 */
             #final-page {
                 display: none;
                 position: absolute;
@@ -156,7 +197,20 @@
                 z-index: 9999;
                 font-family: "Georgia", serif;
                 font-size: 2rem;
+                user-select: none;
             }
+
+            #final-page h1 {
+                font-size: 3rem;
+                animation: fadeIn 2s ease-out forwards;
+            }
+
+            #final-page p {
+                margin-top: 20px;
+                font-size: 1.5rem;
+                opacity: 0.8;
+            }
+
             @keyframes fadeIn {
                 from {
                     opacity: 0;
@@ -167,28 +221,14 @@
                     transform: scale(1);
                 }
             }
-            @keyframes popFadeIn {
-                0% {
-                    opacity: 0;
-                    transform: scale(0.6) translateY(10px);
-                }
-                60% {
-                    opacity: 1;
-                    transform: scale(1.1) translateY(0px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: scale(1) translateY(0px);
-                }
-            }
-            /* rightslide */
+
+            /* 오른쪽으로 슬라이드 애니메이션 */
             @keyframes slideOutRight {
                 to {
                     transform: translateX(120%);
                     opacity: 0;
                 }
             }
-            /* 추가 */
         </style>
     </head>
     <body>
@@ -205,13 +245,10 @@
             <div id="progress-counter">1 / 48</div>
         </div>
         <div id="final-page">
-            <h1 style="font-size: 3rem; animation: fadeIn 2s ease-out forwards">
-                Thank you for joining us.
-            </h1>
-            <p style="margin-top: 20px; font-size: 1.5rem; opacity: 0.8">
-                Together, we grow stronger. 🚀
-            </p>
+            <h1>Thank you for joining us.</h1>
+            <p>Together, we grow stronger. 🚀</p>
         </div>
+
         <script>
             let currentSlide = 1;
             const totalSlides = 48;
@@ -263,9 +300,11 @@
                     }
                 }
             });
+
             document.addEventListener("touchstart", () => {
                 handleAdvance();
             });
+
             function showSlogan() {
                 slogan.innerHTML = "";
                 const textWithSpaces = sloganText.replace(/_/g, " ");
@@ -281,6 +320,7 @@
                 }
                 slogan.style.opacity = 1;
             }
+
             function resetSlogan() {
                 slogan.innerHTML = "";
                 slogan.style.opacity = 0;
@@ -289,6 +329,8 @@
             function endIntro() {
                 eibeTitle.style.animation = "slideOutRight 0.8s ease forwards";
                 slogan.style.animation = "slideOutRight 0.8s ease forwards";
+                hint.style.animation = "none";
+                hint.style.opacity = 0;
 
                 setTimeout(() => {
                     intro.style.opacity = 0;
@@ -302,6 +344,7 @@
                     }, 800);
                 }, 800);
             }
+
             function showIntro() {
                 slider.style.opacity = 0;
                 slider.style.transform = "translateX(100%)";
@@ -312,6 +355,9 @@
                     // 애니메이션 초기화
                     eibeTitle.style.animation = "none";
                     slogan.style.animation = "none";
+                    hint.style.animation = "pulse 1.5s infinite";
+                    hint.style.opacity = 1;
+
                     eibeTitle.style.opacity = "1";
                     eibeTitle.style.transform = "scale(1)";
                     slogan.style.opacity = "0";
@@ -343,10 +389,10 @@
                     updateSlide();
                     updateProgressBar();
                 } else if (currentSlide === totalSlides) {
-                    // 마지막 슬라이드에서 Enter 누르면 바로 Final Page
                     showFinalPage();
                 }
             }
+
             function prevSlide() {
                 if (currentSlide > 1) {
                     currentSlide--;
@@ -374,7 +420,7 @@
                 const percent = (currentSlide / totalSlides) * 100;
                 progressFill.style.width = `${percent}%`;
 
-                // 색상 배열 (10장마다 바뀜)
+                // 10장마다 색상 변경
                 const colors = [
                     "#d4af37", // Gold
                     "#1e90ff", // DodgerBlue
@@ -384,8 +430,10 @@
                 ];
                 const colorIndex =
                     Math.floor((currentSlide - 1) / 10) % colors.length;
-                progressFill.style.backgroundColor = colors[colorIndex];
-                progressFill.style.boxShadow = `0 0 8px ${colors[colorIndex]}`;
+                const color = colors[colorIndex];
+
+                progressFill.style.backgroundColor = color;
+                progressFill.style.boxShadow = `0 0 8px ${color}`;
 
                 if (counter) {
                     counter.textContent = `${currentSlide} / ${totalSlides}`;
