@@ -181,6 +181,14 @@
                     transform: scale(1) translateY(0px);
                 }
             }
+            /* 수정 */
+            @keyframes slideOutRight {
+                to {
+                    transform: translateX(120%);
+                    opacity: 0;
+                }
+            }
+            /* 수정 */
         </style>
     </head>
     <body>
@@ -254,11 +262,9 @@
                     }
                 }
             });
-
             document.addEventListener("touchstart", () => {
                 handleAdvance();
             });
-
             function showSlogan() {
                 slogan.innerHTML = "";
                 const textWithSpaces = sloganText.replace(/_/g, " ");
@@ -279,19 +285,35 @@
                 slogan.textContent = "";
                 slogan.style.opacity = 0;
             }
-
+            // function endIntro() {
+            //     intro.style.opacity = 0;
+            //     setTimeout(() => {
+            //         intro.style.display = "none";
+            //         slider.style.display = "block";
+            //         setTimeout(() => {
+            //             slider.style.opacity = 1;
+            //             slider.style.transform = "translateX(0)";
+            //         }, 50);
+            //     }, 1000);
+            // }
             function endIntro() {
-                intro.style.opacity = 0;
-                setTimeout(() => {
-                    intro.style.display = "none";
-                    slider.style.display = "block";
-                    setTimeout(() => {
-                        slider.style.opacity = 1;
-                        slider.style.transform = "translateX(0)";
-                    }, 50);
-                }, 1000);
-            }
+                // 글자 오른쪽으로 슬라이드 아웃
+                eibeTitle.style.animation = "slideOutRight 0.8s ease forwards";
+                slogan.style.animation = "slideOutRight 0.8s ease forwards";
 
+                // 애니메이션 끝난 후 슬라이더 화면 전환
+                setTimeout(() => {
+                    intro.style.opacity = 0;
+                    setTimeout(() => {
+                        intro.style.display = "none";
+                        slider.style.display = "block";
+                        setTimeout(() => {
+                            slider.style.opacity = 1;
+                            slider.style.transform = "translateX(0)";
+                        }, 50);
+                    }, 800); // 슬라이드 애니메이션 끝나고 화면 전환
+                }, 800);
+            }
             function showIntro() {
                 slider.style.opacity = 0;
                 slider.style.transform = "translateX(100%)";
