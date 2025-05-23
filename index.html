@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <title>eibe Company Intro</title>
         <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nanum+Myeongjo:wght@700&display=swap"
             rel="stylesheet"
         />
         <style>
@@ -18,10 +18,9 @@
                 width: 100%;
                 height: 100%;
                 background-color: #e9f5e1;
-                font-family: "Noto Sans KR", sans-serif;
+                font-family: "Nanum Myeongjo", serif;
                 overflow: hidden;
             }
-
             #intro {
                 width: 100%;
                 height: 100%;
@@ -36,29 +35,27 @@
                 overflow: hidden;
                 user-select: none;
             }
-
             #eibe-title {
-                font-size: clamp(24px, 9vw, 72px);
-                font-weight: bold;
-                letter-spacing: 10px;
-                color: #2f5d34;
-                margin-bottom: 20px;
-                text-shadow: 0 0 8px #b3d8aa, 0 0 12px #a0cfa0;
+                font-family: "Playfair Display", serif;
+                font-size: clamp(28px, 9vw, 80px);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 12px;
+                background: linear-gradient(90deg, #4caf50, #2e7d32);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow: none;
                 animation: popIn 1s ease-out,
-                    softGlow 3s ease-in-out infinite alternate;
+                    softGlowElegant 4s ease-in-out infinite alternate;
             }
-
-            @keyframes softGlow {
+            @keyframes softGlowElegant {
                 0% {
-                    text-shadow: 0 0 4px #a0cfa0, 0 0 8px #9dd59c,
-                        0 0 12px #8ed28f;
+                    text-shadow: 0 0 4px #a8d5aa, 0 0 10px #94c494;
                 }
                 100% {
-                    text-shadow: 0 0 6px #8ecb85, 0 0 12px #7fc97b,
-                        0 0 16px #6bbd6d;
+                    text-shadow: 0 0 8px #80b980, 0 0 12px #6da86d;
                 }
             }
-
             @keyframes popIn {
                 0% {
                     transform: scale(0.8);
@@ -69,26 +66,22 @@
                     opacity: 1;
                 }
             }
-
             #slogan {
                 font-size: clamp(16px, 5vw, 36px);
-                font-weight: 400;
                 letter-spacing: 0.5px;
                 opacity: 0;
                 white-space: nowrap;
-                font-family: "Noto Serif KR", serif;
+                font-family: "Nanum Myeongjo", serif;
                 color: #3d6b4b;
                 text-shadow: 0 0 5px rgba(95, 146, 95, 0.3);
                 margin-bottom: 60px;
             }
-
             #slogan span {
                 display: inline-block;
                 opacity: 0;
                 transform: scale(0.6) translateY(10px);
                 animation: popFadeIn 0.4s ease-out forwards;
             }
-
             @keyframes popFadeIn {
                 0% {
                     opacity: 0;
@@ -103,7 +96,6 @@
                     transform: scale(1) translateY(0);
                 }
             }
-
             #enter-hint {
                 position: absolute;
                 bottom: 40px;
@@ -113,7 +105,6 @@
                 animation: pulse 1.5s infinite;
                 user-select: none;
             }
-
             @keyframes pulse {
                 0% {
                     opacity: 0.4;
@@ -128,7 +119,6 @@
                     transform: scale(1);
                 }
             }
-
             #slider {
                 width: 100%;
                 height: 100%;
@@ -138,19 +128,14 @@
                 transform: translateX(100%);
                 transition: opacity 1s ease, transform 1s ease;
                 background-color: #f1f7ee;
-                user-select: none;
             }
-
             #slide-img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
                 opacity: 1;
                 transition: opacity 0.5s ease-in-out;
-                background-color: #e9f5e1;
-                user-select: none;
             }
-
             #progress-bar {
                 position: absolute;
                 bottom: 0;
@@ -160,7 +145,6 @@
                 background-color: rgba(47, 93, 52, 0.2);
                 box-shadow: 0 0 4px #cbe6cb;
             }
-
             #progress-fill {
                 width: 0%;
                 height: 100%;
@@ -168,7 +152,6 @@
                 transition: width 0.3s ease;
                 box-shadow: 0 0 8px #4caf50;
             }
-
             #progress-counter {
                 position: absolute;
                 bottom: 12px;
@@ -177,9 +160,7 @@
                 color: #2f5d34;
                 font-weight: bold;
                 text-shadow: 0 0 3px #cbe6cb;
-                user-select: none;
             }
-
             #final-page {
                 display: none;
                 position: absolute;
@@ -191,22 +172,17 @@
                 text-align: center;
                 flex-direction: column;
                 z-index: 9999;
-                font-family: "Noto Serif KR", serif;
-                font-size: 2rem;
-                user-select: none;
+                font-family: "Nanum Myeongjo", serif;
             }
-
             #final-page h1 {
                 font-size: 3rem;
                 animation: fadeIn 2s ease-out forwards;
             }
-
             #final-page p {
                 margin-top: 20px;
                 font-size: 1.5rem;
                 opacity: 0.8;
             }
-
             @keyframes fadeIn {
                 from {
                     opacity: 0;
@@ -217,7 +193,6 @@
                     transform: scale(1);
                 }
             }
-
             @keyframes slideOutRight {
                 to {
                     transform: translateX(120%);
@@ -234,12 +209,10 @@
         </div>
         <div id="slider">
             <img id="slide-img" src="./slides/slideshow1.PNG" alt="slide" />
-            <div id="progress-bar">
-                <div id="progress-fill"></div>
-            </div>
+            <div id="progress-bar"><div id="progress-fill"></div></div>
             <div id="progress-counter">1 / 48</div>
         </div>
-        <div id="final-page">
+        <div id="final-page" style="display: none; flex-direction: column">
             <h1>Thank you for joining us.</h1>
             <p>Together, we grow stronger. 🚀</p>
         </div>
@@ -326,7 +299,6 @@
                 slogan.style.animation = "slideOutRight 0.8s ease forwards";
                 hint.style.animation = "none";
                 hint.style.opacity = 0;
-
                 setTimeout(() => {
                     intro.style.opacity = 0;
                     setTimeout(() => {
@@ -346,22 +318,18 @@
                 setTimeout(() => {
                     slider.style.display = "none";
                     intro.style.display = "flex";
-
                     eibeTitle.style.animation = "none";
                     slogan.style.animation = "none";
                     hint.style.animation = "pulse 1.5s infinite";
                     hint.style.opacity = 1;
-
                     eibeTitle.style.opacity = "1";
                     eibeTitle.style.transform = "scale(1)";
                     slogan.style.opacity = "0";
                     slogan.style.transform = "none";
-
-                    resetSlogan(); // 슬로건 완전 초기화
-                    void eibeTitle.offsetWidth; // reflow for animation
+                    resetSlogan();
+                    void eibeTitle.offsetWidth;
                     eibeTitle.style.animation =
-                        "popIn 1s ease-out, softGlow 3s ease-in-out infinite alternate";
-
+                        "popIn 1s ease-out, softGlowElegant 4s ease-in-out infinite alternate";
                     setTimeout(() => {
                         intro.style.opacity = 1;
                     }, 50);
@@ -409,7 +377,6 @@
             function updateProgressBar() {
                 const percent = (currentSlide / totalSlides) * 100;
                 progressFill.style.width = `${percent}%`;
-
                 const colors = [
                     "#4caf50",
                     "#1e88e5",
@@ -420,13 +387,9 @@
                 const colorIndex =
                     Math.floor((currentSlide - 1) / 10) % colors.length;
                 const color = colors[colorIndex];
-
                 progressFill.style.backgroundColor = color;
                 progressFill.style.boxShadow = `0 0 8px ${color}`;
-
-                if (counter) {
-                    counter.textContent = `${currentSlide} / ${totalSlides}`;
-                }
+                counter.textContent = `${currentSlide} / ${totalSlides}`;
             }
         </script>
     </body>
