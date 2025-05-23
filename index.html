@@ -288,7 +288,7 @@
                         prevSlide();
                     } else if (stage === 2 && currentSlide === 1) {
                         showIntro();
-                        stage = 1;
+                        stage = 0;
                     } else if (stage === 1) {
                         resetSlogan();
                         stage = 0;
@@ -357,12 +357,10 @@
                     slogan.style.opacity = "0";
                     slogan.style.transform = "none";
 
-                    void eibeTitle.offsetWidth;
+                    resetSlogan(); // 슬로건 완전 초기화
+                    void eibeTitle.offsetWidth; // reflow for animation
                     eibeTitle.style.animation =
                         "popIn 1s ease-out, softGlow 3s ease-in-out infinite alternate";
-
-                    resetSlogan();
-                    showSlogan();
 
                     setTimeout(() => {
                         intro.style.opacity = 1;
