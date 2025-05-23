@@ -127,7 +127,7 @@
                 opacity: 0;
                 transform: translateX(100%);
                 transition: opacity 1s ease, transform 1s ease;
-                background-color: #e9f5e1; /* 기존 intro 색상으로 통일 */
+                background-color: #f1f7ee;
             }
             #slide-img {
                 width: 100%;
@@ -330,6 +330,12 @@
                     void eibeTitle.offsetWidth;
                     eibeTitle.style.animation =
                         "popIn 1s ease-out, softGlowElegant 4s ease-in-out infinite alternate";
+
+                    // 슬로건 다시 출력
+                    if (stage === 1) {
+                        showSlogan(); // 이 줄 추가
+                    }
+
                     setTimeout(() => {
                         intro.style.opacity = 1;
                     }, 50);
